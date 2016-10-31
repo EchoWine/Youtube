@@ -8,7 +8,10 @@ class SimpleTest extends TestCase{
    
     public function testVideo(){
 
-        Youtube::download('bVSNKn3YTew','tmp/bVSNKn3YTew');
+        print_r(Youtube::video('iNJdPyoqt8U') -> getVideoCloserTo('720p') -> getUrl());
+        return;
+
+        print_r(Youtube::video('i5DjkBBonlo'));
     }
 
 }
