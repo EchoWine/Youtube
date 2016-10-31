@@ -48,7 +48,17 @@ class Video{
 			$formats[] = new Format($format_raw);
 		}
 
+		$this -> title = $params['title'];
 		$this -> formats = $formats;
+	}
+
+	/**
+	 * Return title of video
+	 *
+	 * @return string
+	 */
+	public function getTitle(){
+		return $this -> title;
 	}
 
 	/**
@@ -69,7 +79,7 @@ class Video{
 		$best = null;
 
 		foreach($this -> formats as $format){
-			if($format -> isVideo() && !$best || $best -> isBetter($format)){
+			if($format -> isVideo() && $format -> getType() == 'video/mp4' && (!$best || $best -> isBetter($format))){
 				$best = $format;
 			}
 		}
@@ -111,6 +121,21 @@ class Video{
 
 		return $return;
 
+	}
+
+
+	/**
+	 * Return all formats audio
+	 *
+	 * @return array
+	 */
+	public function getFirstAudio(){
+		foreach($this -> formats as $format){
+			if($format -> getType() == 'audio/mp4')
+				return $format;
+		}
+
+		return null;
 	}
 
 	/**
